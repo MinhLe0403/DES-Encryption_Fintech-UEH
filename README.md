@@ -373,3 +373,43 @@ cipher_hex = Binary_to_Hex(cipher)
 
 print(cipher_hex)
 ```
+## Giải mã mã hóa DES
+
+***1. Đảo ngược thứ tự khóa***
+
+***2. Giải mã như ban đầu***
+```python
+# Final Li = R(i-1) và Ri = L(i-1) XOR f(R(i-1), K(i))
+def DES_Dencryption(plain_text):
+    # Hoán vị ban đầu
+    Left, Right = Initial_Permutation(plain_text)
+    subkeys = Generate_Subkey(Key)
+    subkeys.reverse()
+    
+    # 16 vòng lặp
+    for i in range(16):
+        # Lưu lại giá trị của Right
+        temp = Right
+        
+        # Tính f(Right, subkey)
+        f_result = E_function(Right)       # Mở rộng Right từ 32 bit lên 48 bit
+        f_result = XOR(f_result, subkeys[i])  # XOR với khóa con
+        f_result = S_box(f_result)         # Thay thế bằng S-box
+        f_result = P_box(f_result)         # Hoán vị P-box
+        
+        # Right = Left XOR f(Right, subkey)
+        Right = XOR(Left, f_result)
+        
+        # Left = Right cũ
+        Left = temp
+    
+    # Đổi vị trí Left và Right cuối cùng (swap)
+    Left, Right = Right, Left
+    
+    # Kết quả cuối cùng
+    result = Left + Right
+    return result
+decrypted_text_binary = Final_Permutation(DES_Dencryption(cipher_hex))
+decrypted_text = Binary_to_Hex(decrypted_text_binary)
+print(decrypted_text)
+```
