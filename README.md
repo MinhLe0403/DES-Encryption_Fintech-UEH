@@ -303,6 +303,7 @@ Sau khi Right_text còn 32 bit, ta sẽ hoán vị nó theo bảng P_box theo th
 ***1. XOR giữa Right_text và Left_text***
 
 Sau khi ta đã mã hóa được Right_text qua các bước trên, bước cuối cùng để kết thúc 1 vòng Fistel chính là phải XOR giữa Right_text và Left_text để trả về Right_text cuối cùng
+
 ***2. Cho Left_text là Right_text ban đầu***
 ```python
 # Final Li = R(i-1) và Ri = L(i-1) XOR f(R(i-1), K(i))
