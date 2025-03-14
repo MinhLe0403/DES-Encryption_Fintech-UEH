@@ -141,7 +141,7 @@ class DES:
     
     def binary_to_hex(self, binary_text):
         """Chuyển đổi nhị phân sang HEX"""
-        return ''.join([hex(int(binary_text[i:i+4], 2))[2:] for i in range(0, len(binary_text), 4)])
+        return ''.join([hex(int(binary_text[i:i+4], 2))[2:].upper() for i in range(0, len(binary_text), 4)])
     
     def hex_to_ascii(self, hex_text):
         """Chuyển đổi HEX sang ASCII"""
