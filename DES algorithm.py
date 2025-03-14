@@ -308,9 +308,13 @@ if __name__ == "__main__":
     decrypted = des.decrypt(ciphertext, key)
     print(f"Decrypted:  {decrypted}")
     
+    # Khóa con
+    subkeys = des.generate_subkeys(key)
+    for i, subkey in enumerate(subkeys):
+        print(f"Subkey {i + 1}: {des.binary_to_hex(subkey)}")
+
     # Kiểm tra kết quả
     if decrypted == plaintext:
         print("Mã hóa và giải mã thành công!")
     else:
         print("Có lỗi xảy ra trong quá trình mã hóa/giải mã.")
-    print(des.generate_subkeys(key))
